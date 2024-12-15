@@ -1,6 +1,7 @@
 package com.take_homechallenge.Miguel.takeHomeChallenge.service.impl;
 
 import com.take_homechallenge.Miguel.takeHomeChallenge.domain.Accreditation;
+import com.take_homechallenge.Miguel.takeHomeChallenge.domain.AccreditationApprovalResoult;
 import com.take_homechallenge.Miguel.takeHomeChallenge.domain.AccreditationEntity;
 import com.take_homechallenge.Miguel.takeHomeChallenge.domain.AccreditationStatus;
 import com.take_homechallenge.Miguel.takeHomeChallenge.service.AccreditationService;
@@ -24,7 +25,7 @@ public class AccreditationServiceImpl implements AccreditationService {
 
     @Override
     public Accreditation createNewAccreditationWithDocument(Accreditation accreditation) {
-        if (!accreditationExistsById(accreditation)) {
+        if (!accreditationExistsById(accreditation.getId())) {
             accreditation.setStatus(AccreditationStatus.PENDING);
             documentService.createDocument(accreditation.getDocument());
             final AccreditationEntity accreditationEntity = accreditationToAccreditationEntity(accreditation);
@@ -35,8 +36,27 @@ public class AccreditationServiceImpl implements AccreditationService {
     }
 
     @Override
-    public Boolean accreditationExistsById(Accreditation accreditation) {
+    public Boolean accreditationAndDocumentExists(Accreditation accreditation) {
         return accreditationRepository.existsById(accreditation.getId()) && documentService.DocumentExistsById(accreditation.getDocument().getId());
+    }
+    @Override
+    public Boolean accreditationExistsById(String accreditationId) {
+        return accreditationRepository.existsById(accreditationId) ;
+    }
+
+
+    @Override
+    public AccreditationApprovalResoult ApproveAccreditation(String accreditationId){
+        if (accreditationExistsById(accreditationId)) {
+            Accreditation accreditation = accreditationEntityToAccreditation(accreditationRepository.getById(accreditationId));
+            if(!accreditation.getStatus().equals(AccreditationStatus.EXPIRED)){
+                accreditation.setStatus(AccreditationStatus.CONFIRMED);
+                accreditationRepository.save(accreditationToAccreditationEntity(accreditation));
+                return AccreditationApprovalResoult.builder().outcome(accreditation.getStatus()).build();
+            }
+        }
+        return null;
+
     }
 
     private AccreditationEntity accreditationToAccreditationEntity(Accreditation accreditation) {

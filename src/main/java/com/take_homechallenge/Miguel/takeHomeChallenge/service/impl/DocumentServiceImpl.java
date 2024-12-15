@@ -23,7 +23,7 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public Document createDocument(Document accreditation) {
         final DocumentEntity accreditationEntity = documentToDocumentEntity(accreditation);
-        final  DocumentEntity savedAccreditationEntity = documentRepository.save(accreditationEntity);
+        final DocumentEntity savedAccreditationEntity = documentRepository.save(accreditationEntity);
         return documentEntityToDocument(savedAccreditationEntity);
     }
 
@@ -32,8 +32,7 @@ public class DocumentServiceImpl implements DocumentService {
         return documentRepository.existsById(id);
     }
 
-    public Document documentEntityToDocument(final @NotNull DocumentEntity documentEntity)
-    {
+    public Document documentEntityToDocument(final @NotNull DocumentEntity documentEntity) {
         return Document.builder()
                 .id(documentEntity.getId())
                 .content(documentEntity.getContent())
@@ -42,8 +41,7 @@ public class DocumentServiceImpl implements DocumentService {
                 .build();
     }
 
-    public DocumentEntity documentToDocumentEntity(final Document document)
-    {
+    public DocumentEntity documentToDocumentEntity(final Document document) {
         return DocumentEntity.builder()
                 .id(document.getId())
                 .content(document.getContent())

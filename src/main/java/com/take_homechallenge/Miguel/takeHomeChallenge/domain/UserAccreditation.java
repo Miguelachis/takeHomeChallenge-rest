@@ -1,17 +1,18 @@
 package com.take_homechallenge.Miguel.takeHomeChallenge.domain;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AccreditationApprovalResoult {
-    @Enumerated(EnumType.STRING)
-    private AccreditationStatus outcome;
+
+public class UserAccreditation {
+    private String userId;
+    private Map<String, AccreditationStatuses> accreditationStatuses;
 }

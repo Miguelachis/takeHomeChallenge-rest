@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "e07da4aa-158b-4899-8463-273eaa9ac374",
+		"name": "Miguel Cachia take-home challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10391698"
+	},
+	"item": [
+		{
+			"name": "1 Save new accreditation",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 291,\r\n  \"userId\": \"12\",\r\n  \"document\": {\r\n    \"id\": \"1\",\r\n    \"name\": \"2018.pdf\",\r\n    \"mime_type\": \"application/pdf\",\r\n    \"content\": \"ICAiQC8qIjogWyJzcmMvKiJdCiAgICB9CiAgfQp9Cg==\"\r\n  },\r\n  \"accreditation_type\": \"BY_INCOME\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/user/accreditation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"user",
+						"accreditation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2 Create Second accreditation with same user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 292,\r\n  \"userId\": \"12\",\r\n  \"document\": {\r\n    \"id\": \"2\",\r\n    \"name\": \"2019.pdf\",\r\n    \"mime_type\": \"application/pdf\",\r\n    \"content\": \"ICAiQC8qIjogWyJzcmMvKiJdCiAgICB9CiAgfQp9Cg==\"\r\n  },\r\n  \"accreditation_type\": \"BY_INCOME\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/user/accreditation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"user",
+						"accreditation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3 Approving one accreditation",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/user/accreditation/291",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"user",
+						"accreditation",
+						"291"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4 Get list of accreditation by userId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/user/12/accreditation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"user",
+						"12",
+						"accreditation"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

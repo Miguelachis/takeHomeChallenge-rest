@@ -1,4 +1,5 @@
 Miguel Cachia take-home challenge
+Note: please find the Postman calls in the Miguel Cachia take-home challenge.postman_collection.json file.
 
 QA.
 In this project, I used the Spring Framework with Maven as the build automation and dependency management tool. Spring was chosen due to its simplistic design,
